@@ -3,11 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var messages = [{
-  id: 1,
-  text: "Hola soy un mensaje",
-  author: "Carlos Azaustre"
-}];
+var messages = [];
 
 app.use(express.static('Cliente'));
 
