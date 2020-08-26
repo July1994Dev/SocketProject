@@ -7,10 +7,6 @@ var messages = [];
 
 app.use(express.static('Cliente'));
 
-app.get('/hello', function(req, res) {
-  res.status(200).send("ola :v World!");
-});
-
 io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
   socket.emit('messages', messages);

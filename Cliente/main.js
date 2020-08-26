@@ -1,5 +1,5 @@
 var socket = io.connect('http://localhost:8080', { 'forceNew': true });
-
+var autor = null;
 socket.on('messages', function(data) {
   console.log(data);
   render(data);
@@ -7,9 +7,9 @@ socket.on('messages', function(data) {
 
 function render (data) {
   var html = data.map(function(elem, index) {
-    return(`<div>
-              <strong>${elem.author}</strong>:
-              <em>${elem.text}</em>
+    var clase = elem.author != autor ? "recieved" : "send";
+    return(`<div class="${clase}">
+              ${elem.text}
             </div>`);
   }).join(" ");
 
@@ -17,8 +17,11 @@ function render (data) {
 }
 
 function addMessage(e) {
+  if(autor === null){
+    autor = document.getElementById('username').value;
+  }
   var message = {
-    author: document.getElementById('username').value,
+    author: autor,
     text: document.getElementById('texto').value
   };
 
